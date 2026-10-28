@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Happy Birthday, Doctor ♥</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;800&family=Caveat:wght@500;700&family=Noto+Serif+Tamil:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#effaf8; --ink:#10343c; --soft:#4f7a80; --paper:#fffdf8; --rose:#e5254f; --teal:#0f8b8d; --grid:rgba(15,139,141,.10);
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px); color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#0a232b; --ink:#e6f7f5; --soft:#8fc4c4; --paper:#12333c; --rose:#ff4d73; --teal:#4fd1c5; --grid:rgba(79,209,197,.10); color-scheme:dark;}
+}
+:root[data-theme="dark"]{--bg:#0a232b; --ink:#e6f7f5; --soft:#8fc4c4; --paper:#12333c; --rose:#ff4d73; --teal:#4fd1c5; --grid:rgba(79,209,197,.10); color-scheme:dark;}
+*,*::before,*::after{box-sizing:border-box}
+html,body{min-height:100%}
+body{margin:0;color:var(--ink);font-family:"Bricolage Grotesque",system-ui,sans-serif;line-height:1.5;overflow-x:hidden;
+  background:var(--bg) linear-gradient(var(--grid) 1px,transparent 1px) 0 0/26px 26px,linear-gradient(90deg,var(--grid) 1px,transparent 1px) 0 0/26px 26px}
+button{font:inherit;color:inherit}
+
+.progress{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;display:flex;justify-content:center;gap:.7rem;padding:.9rem;z-index:5}
+.progress span{font-size:1.3rem;color:var(--grid);filter:saturate(0);transition:.4s}
+.progress span.done{color:var(--rose);filter:none;transform:scale(1.15)}
+
+.page{display:none;min-height:100vh;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:4.2rem 1.25rem 2.5rem}
+.page.on{display:flex;animation:in .6s ease both}
+@keyframes in{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:none}}
+
+h1,h2{margin:0;font-weight:800;letter-spacing:-.03em;line-height:1.05}
+h1{font-size:clamp(2.6rem,11vw,5.6rem)}
+h1 small{display:block;font-family:"Caveat",cursive;font-weight:700;font-size:.55em;color:var(--rose);letter-spacing:0;margin-bottom:.2rem}
+h2{font-size:clamp(1.9rem,7vw,3.2rem)}
+.sub{max-width:36ch;color:var(--soft);font-size:1.15rem;margin:1rem auto 0}
+.step{font-family:"Caveat",cursive;font-size:1.6rem;color:var(--rose);margin:0 0 .4rem}
+
+.heart{font-size:clamp(4.5rem,20vw,8rem);line-height:1;color:var(--rose);margin:1rem 0 0;animation:beat 1.2s ease-in-out infinite;filter:drop-shadow(0 8px 24px rgba(229,37,79,.45))}
+@keyframes beat{0%,100%{transform:scale(1)}15%{transform:scale(1.2)}30%{transform:scale(1)}45%{transform:scale(1.12)}}
+.ecg{width:min(560px,100%);height:auto}
+.ecg path{fill:none;stroke:var(--rose);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1300;stroke-dashoffset:1300;animation:draw 3s linear infinite}
+@keyframes draw{to{stroke-dashoffset:0}}
+
+.btn{margin-top:1.6rem;cursor:pointer;border:0;background:var(--rose);color:#fff;font-weight:800;font-size:1.05rem;padding:.9rem 1.8rem;border-radius:999px;box-shadow:0 10px 28px rgba(229,37,79,.4);transition:.25s}
+.btn:disabled{opacity:.35;box-shadow:none;cursor:not-allowed}
+.btn:focus-visible,.choice:focus-visible{outline:3px solid var(--teal);outline-offset:3px}
+.btn.ghost{background:transparent;color:var(--rose);box-shadow:none;border:2px solid var(--rose)}
+
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:1rem;width:min(560px,100%);margin-top:1.6rem}
+.choice{cursor:pointer;background:var(--paper);border:2px solid var(--teal);border-radius:18px;padding:1.2rem .6rem;font-weight:800;box-shadow:0 8px 22px rgba(10,50,60,.12);transition:.25s}
+.choice b{display:block;font-size:2.6rem;line-height:1.2;font-weight:400}
+.choice:hover{transform:translateY(-3px)}
+.choice.sel{border-color:var(--rose);background:var(--rose);color:#fff;transform:scale(1.04)}
+.msg{font-family:"Caveat",cursive;font-weight:500;font-size:1.8rem;line-height:1.3;color:var(--rose);max-width:26ch;min-height:5.2rem;margin:1.2rem auto 0}
+
+/* cake */
+.cake{position:relative;width:220px;height:250px;margin:1.8rem auto 1.5rem}
+.tier{position:absolute;border-radius:14px}
+.tier::before{content:"";position:absolute;inset:0 0 auto 0;height:30px;border-radius:14px 14px 0 0;
+  background:radial-gradient(circle at 15px 15px,#fff 13px,transparent 14px) 0 0/30px 30px repeat-x,linear-gradient(#fff,#fff) 0 0/100% 15px no-repeat}
+.bottom{bottom:0;left:0;width:220px;height:100px;background:#ff8fb1}
+.top{bottom:100px;left:30px;width:160px;height:75px;background:#ffc2d6}
+.plate{position:absolute;bottom:-12px;left:-20px;width:260px;height:14px;border-radius:50%;background:#e9d9df}
+.candle{position:absolute;bottom:175px;left:50%;width:12px;height:44px;margin-left:-6px;border-radius:3px;background:repeating-linear-gradient(135deg,#fff 0 6px,var(--rose) 6px 12px)}
+.flame{position:absolute;bottom:216px;left:50%;width:16px;height:26px;margin-left:-8px;border-radius:50% 50% 50% 50%/65% 65% 35% 35%;
+  background:radial-gradient(circle at 50% 70%,#fff6c9 0 25%,#f5a623 60%,#ff7a1a);box-shadow:0 0 30px 10px rgba(245,166,35,.45);
+  transform-origin:50% 100%;animation:flicker 1.1s ease-in-out infinite alternate;transition:opacity .5s}
+@keyframes flicker{from{transform:rotate(-4deg) scaleY(1)}to{transform:rotate(4deg) scaleY(1.12)}}
+.blown .flame{opacity:0;animation:none}
+.after{display:none}
+.blown .after{display:block;animation:in .8s ease both}
+.blown .before{display:none}
+.final{font-family:"Caveat",cursive;font-size:1.7rem;line-height:1.35;max-width:30ch;margin:1rem auto 0}
+
+/* hearts rain */
+.rain{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:4}
+.rain span{position:absolute;top:-40px;left:var(--x);font-size:var(--s);color:var(--c);opacity:0}
+.rain span::before{content:"♥"}
+.blown .rain span{animation:fall 5s var(--d) 1 forwards}
+@keyframes fall{0%{opacity:1;transform:translateY(0) rotate(-15deg)}100%{opacity:.9;transform:translateY(115vh) rotate(25deg)}}
+
+.amb{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.amb i{position:absolute;bottom:-40px;left:var(--x);font-style:normal;font-size:var(--s);color:var(--rose);opacity:0;animation:rise var(--t) linear var(--d) infinite}
+.amb i::before{content:"♥"}
+@keyframes rise{0%{opacity:0;transform:translateY(0)}15%{opacity:.28}100%{opacity:0;transform:translateY(-110vh) rotate(30deg)}}
+.page{position:relative;z-index:1}
+.pop{position:fixed;pointer-events:none;z-index:9;color:var(--rose);font-size:1.4rem;animation:pop .9s ease-out forwards}
+@keyframes pop{to{opacity:0;transform:translate(var(--dx),var(--dy)) scale(.4)}}
+.scanbox{position:relative;margin:1rem auto 0;width:min(340px,100%);padding:1rem;border:2px solid var(--teal);border-radius:20px;background:var(--paper);overflow:hidden}
+.scanbox .heart{margin:0;font-size:6rem}
+.scanbox::after{content:"";position:absolute;left:0;right:0;height:60px;top:-60px;background:linear-gradient(transparent,rgba(15,139,141,.45),transparent);opacity:0}
+.scanning .scanbox::after{opacity:1;animation:sweep 1.1s linear 2}
+@keyframes sweep{to{top:100%}}
+.res{display:none;text-align:left;margin-top:.8rem;font-weight:500;font-size:.95rem}
+.scanned .res{display:block;animation:in .6s ease both}
+.res div{margin-bottom:.6rem}
+.res i{display:block;height:10px;width:100%;border-radius:99px;background:linear-gradient(90deg,var(--teal),var(--rose));margin-top:.2rem;animation:fill 1.6s ease both}
+@keyframes fill{from{width:0}}
+.res p{font-family:"Caveat",cursive;font-size:1.6rem;color:var(--rose);margin:.4rem 0 0;line-height:1.2}
+.scanned .scanbtn{display:none}
+.reason{font-family:"Caveat",cursive;font-weight:700;font-size:2.1rem;line-height:1.2;max-width:18ch;min-height:9rem;margin:.8rem auto 0;color:var(--rose);display:flex;align-items:center;justify-content:center}
+.reason.go{animation:rpop .6s ease both}
+@keyframes rpop{from{opacity:0;transform:scale(.6) rotate(-4deg)}to{opacity:1;transform:none}}
+.count{color:var(--soft);margin:.5rem 0 0}
+.moon{width:110px;height:110px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fffbe6,#ffe9a8 60%,#f5c96a);box-shadow:0 0 60px 18px rgba(255,220,130,.45);margin:0 auto 1.6rem;animation:beat 3s ease-in-out infinite}
+.poem{font-family:"Noto Serif Tamil","Latha",serif;font-weight:700;font-size:clamp(1.25rem,5.2vw,1.8rem);line-height:1.8;width:min(540px,100%)}
+.poem p{margin:.6rem 0}
+.poem p:nth-child(1){animation:in 1s ease .3s both}
+.poem p:nth-child(2){color:var(--rose);animation:in 1s ease 1.6s both}
+@media (prefers-reduced-motion:reduce){.moon,.poem p{animation:none}.amb i,.pop{display:none}
+  .heart,.flame,.ecg path,.page.on,.blown .after{animation:none}.ecg path{stroke-dashoffset:0}
+  .blown .rain span{animation:none;opacity:0}
+}
+</style>
+</head>
+<body>
+<div class="progress" id="progress" aria-hidden="true"><span>♥</span><span>♥</span><span>♥</span><span>♥</span><span>♥</span><span>♥</span><span>♥</span><span>♥</span></div>
+
+<div class="rain" aria-hidden="true">
+  <span style="--x:4%;--d:0s;--s:26px;--c:#e5254f"></span><span style="--x:14%;--d:.5s;--s:18px;--c:#ff8fa8"></span>
+  <span style="--x:24%;--d:.2s;--s:30px;--c:#ff4d73"></span><span style="--x:34%;--d:.9s;--s:20px;--c:#e5254f"></span>
+  <span style="--x:44%;--d:.3s;--s:28px;--c:#ff8fa8"></span><span style="--x:54%;--d:1.1s;--s:22px;--c:#ff4d73"></span>
+  <span style="--x:64%;--d:.1s;--s:32px;--c:#e5254f"></span><span style="--x:74%;--d:.7s;--s:18px;--c:#ff8fa8"></span>
+  <span style="--x:84%;--d:.4s;--s:26px;--c:#ff4d73"></span><span style="--x:94%;--d:1s;--s:22px;--c:#e5254f"></span>
+  <span style="--x:9%;--d:1.4s;--s:24px;--c:#ff4d73"></span><span style="--x:39%;--d:1.6s;--s:30px;--c:#ff8fa8"></span>
+  <span style="--x:59%;--d:1.3s;--s:20px;--c:#e5254f"></span><span style="--x:79%;--d:1.7s;--s:28px;--c:#ff4d73"></span>
+</div>
+
+<div class="amb" aria-hidden="true">
+  <i style="--x:6%;--s:22px;--t:9s;--d:0s"></i><i style="--x:18%;--s:16px;--t:11s;--d:2s"></i><i style="--x:30%;--s:28px;--t:10s;--d:4s"></i>
+  <i style="--x:42%;--s:18px;--t:12s;--d:1s"></i><i style="--x:54%;--s:24px;--t:9s;--d:5s"></i><i style="--x:66%;--s:16px;--t:11s;--d:3s"></i>
+  <i style="--x:78%;--s:30px;--t:10s;--d:6s"></i><i style="--x:90%;--s:20px;--t:12s;--d:2.5s"></i>
+</div>
+<!-- Page 1 -->
+<section class="page on">
+  <h1><small>Happy Birthday,</small>Doctor Rithu</h1>
+  <p class="sub">You take care of everyone. Today, I have a few small surprises just for you.</p>
+  <div class="heart" aria-hidden="true">♥</div>
+  <svg class="ecg" viewBox="0 0 600 110" aria-hidden="true"><path d="M0 60H170L190 60 205 22 225 98 245 38 258 60H390L410 60 425 22 445 98 465 38 478 60H600"/></svg>
+  <button class="btn" data-next>Start your surprise</button>
+</section>
+
+<!-- Page 2 -->
+<section class="page">
+  <p class="step">Surprise 1 of 5</p>
+  <h2>Doctor, choose your medicine</h2>
+  <div class="opts">
+    <button class="choice" data-msg="Then come here. I’m holding you tight and not letting go."><b>🤗</b>A big hug</button>
+    <button class="choice" data-msg="Delivered with all my love. Dose repeats daily, doctor’s orders."><b>💋</b>A sweet kiss</button>
+    <button class="choice" data-msg="Of course. Sweet things for the sweetest person I know."><b>🍫</b>Chocolate</button>
+  </div>
+  <p class="msg" aria-live="polite"></p>
+  <button class="btn" data-next disabled>Next</button>
+</section>
+
+<!-- Page 3 -->
+<section class="page">
+  <p class="step">Surprise 2 of 5</p>
+  <h2>Pick one gift box</h2>
+  <div class="opts">
+    <button class="choice" data-msg="You make my days lighter. Thank you for being exactly you."><b>🎁</b>Box 1</button>
+    <button class="choice" data-msg="I’m so proud of you. Every patient is lucky to have you, and so am I."><b>🎁</b>Box 2</button>
+    <button class="choice" data-msg="After the hardest shifts, remember someone is waiting to hug you at home."><b>🎁</b>Box 3</button>
+  </div>
+  <p class="msg" aria-live="polite"></p>
+  <button class="btn" data-next disabled>Next</button>
+</section>
+
+<section class="page" id="scan">
+  <p class="step">Surprise 3 of 5</p>
+  <h2>Let me scan my heart for you</h2>
+  <div class="scanbox">
+    <div class="heart" aria-hidden="true">♥</div>
+    <div class="res">
+      <div>Love for you<i></i></div>
+      <div>Missing you on your shifts<i></i></div>
+      <div>Pride in you<i></i></div>
+      <p>Diagnosis: madly, deeply in love with Dr. Rithu ♥</p>
+    </div>
+  </div>
+  <button class="btn scanbtn" id="scanbtn">Start the scan</button>
+  <button class="btn" data-next disabled>Next</button>
+</section>
+
+<section class="page" id="why">
+  <p class="step">Surprise 4 of 5</p>
+  <h2>Why I love you</h2>
+  <p class="count" id="count">Tap to hear 6 reasons</p>
+  <div class="reason" id="reason" aria-live="polite">♥</div>
+  <button class="btn" id="whybtn">Tell me a reason</button>
+  <button class="btn" data-next disabled>Next</button>
+</section>
+
+<section class="page">
+  <p class="step">A little poem for you</p>
+  <div class="moon" aria-hidden="true"></div>
+  <div class="poem" lang="ta">
+    <p>நிலவுக்கும் அழகுதான், நீ சிரிக்கும் நேரம்… 🌙❤️</p>
+    <p>என் இதயத்துக்கே அழகுதான், உன் பெயரைச் சொல்லும் தருணம்! 🫶🏻</p>
+  </div>
+  <button class="btn" data-next>Next</button>
+</section>
+
+<!-- Page 4 -->
+<section class="page">
+  <p class="step">Surprise 5 of 5</p>
+  <h2>What do you wish for this year?</h2>
+  <div class="opts">
+    <button class="choice" data-msg="I promise you lazy mornings, hot tea, and no alarms on holidays."><b>😴</b>Rest</button>
+    <button class="choice" data-msg="Then pack your bags. I’ll go anywhere in the world with you."><b>✈️</b>Travel</button>
+    <button class="choice" data-msg="That’s my wish too. Every day with you, for always."><b>💞</b>More of us</button>
+  </div>
+  <p class="msg" aria-live="polite"></p>
+  <button class="btn" data-next disabled>Last step</button>
+</section>
+
+<!-- Page 5 -->
+<section class="page" id="last">
+  <div class="before">
+    <p class="step">Now, the best part</p>
+    <h2>Make a wish, my doctor</h2>
+  </div>
+  <div class="after">
+    <h2>Happy Birthday, Doctor Rithu ♥</h2>
+  </div>
+  <div class="cake" aria-hidden="true">
+    <div class="plate"></div><div class="tier bottom"></div><div class="tier top"></div>
+    <div class="candle"></div><div class="flame"></div>
+  </div>
+  <div class="before"><button class="btn" id="blow">Blow the candle</button></div>
+  <div class="after">
+    <p class="final">May this year be as kind to you as you are to everyone. You are my doctor, my heart and my whole world. I love you today, tomorrow and always.<br>Forever yours, Divn ♥</p>
+    <button class="btn ghost" id="again">Watch again</button>
+  </div>
+</section>
+
+<script>
+(function(){
+  var pages=[].slice.call(document.querySelectorAll('.page')),dots=[].slice.call(document.querySelectorAll('#progress span')),i=0;
+  function go(n){
+    pages[i].classList.remove('on');i=n;pages[i].classList.add('on');
+    dots.forEach(function(d,k){d.classList.toggle('done',k<=i)});
+    window.scrollTo(0,0);
+  }
+  dots[0].classList.add('done');
+  [].forEach.call(document.querySelectorAll('[data-next]'),function(b){b.addEventListener('click',function(){go(i+1)})});
+  [].forEach.call(document.querySelectorAll('.choice'),function(c){
+    c.addEventListener('click',function(){
+      var p=c.closest('.page');
+      [].forEach.call(p.querySelectorAll('.choice'),function(x){x.classList.remove('sel')});
+      c.classList.add('sel');
+      p.querySelector('.msg').textContent=c.getAttribute('data-msg');
+      p.querySelector('[data-next]').disabled=false;
+    });
+  });
+  function pop(x,y,k,r){for(var j=0;j<k;j++){var s=document.createElement('span');s.className='pop';s.textContent='♥';s.style.left=x+'px';s.style.top=y+'px';s.style.setProperty('--dx',((Math.random()*2-1)*r)+'px');s.style.setProperty('--dy',(-Math.random()*r-30)+'px');document.body.appendChild(s);setTimeout(function(e){e.remove()},900,s)}}
+  document.addEventListener('pointerdown',function(e){pop(e.clientX,e.clientY,5,90)});
+  document.getElementById('blow').addEventListener('click',function(){document.body.classList.add('blown');pop(innerWidth/2,innerHeight/2,45,320)});
+  document.getElementById('scanbtn').addEventListener('click',function(){var p=document.getElementById('scan');p.classList.add('scanning');this.disabled=true;setTimeout(function(){p.classList.add('scanned');p.querySelector('[data-next]').disabled=false},2300)});
+  var R=['Your smile makes every bad day disappear.','You care for strangers like they are family.','You stay strong, even when you are tired.','Your laugh is my favourite sound.','You make me want to be a better person.','Because with you, I am home.'],n=0;
+  document.getElementById('whybtn').addEventListener('click',function(){var r=document.getElementById('reason');r.textContent=R[n];r.classList.remove('go');void r.offsetWidth;r.classList.add('go');n++;document.getElementById('count').textContent='Reason '+n+' of 6';if(n<R.length){this.textContent='Another one'}else{this.disabled=true;this.textContent='And a million more';document.querySelector('#why [data-next]').disabled=false}});
+  document.getElementById('again').addEventListener('click',function(){
+    document.body.classList.remove('blown');
+    [].forEach.call(document.querySelectorAll('.choice.sel'),function(x){x.classList.remove('sel')});
+    [].forEach.call(document.querySelectorAll('.msg'),function(m){m.textContent=''});
+    document.getElementById('scan').classList.remove('scanning','scanned');document.getElementById('scanbtn').disabled=false;
+    n=0;document.getElementById('reason').textContent='♥';document.getElementById('count').textContent='Tap to hear 6 reasons';var w=document.getElementById('whybtn');w.disabled=false;w.textContent='Tell me a reason';
+    [].forEach.call(document.querySelectorAll('.page [data-next]'),function(b,k){if(k>0)b.disabled=true});
+    go(0);
+  });
+})();
+</script>
+</body>
+</html>
